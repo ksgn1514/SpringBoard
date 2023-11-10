@@ -33,6 +33,38 @@
     </div>
   </div>
 
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script>
+    // 로그인
+    function login() {
+
+      const form = document.getElementById('loginForm');
+
+      if (!form.loginId.value || !form.password.value) {
+        alert('아이디와 비밀번호를 모두 입력해 주세요.');
+        form.loginId.focus();
+        return false;
+      }
+
+      $.ajax({
+        url: '/login',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          loginId: form.loginId.value,
+          password: form.password.value
+        },
+        async: false,
+        success: function (response) {
+          location.href = '/post/list.do';
+        },
+        error: function (request, status, error) {
+          alert('아이디와 비밀번호를 확인해 주세요.');
+        }
+      })
+    }
+  </script>
+
 </body>
 
 </html>
